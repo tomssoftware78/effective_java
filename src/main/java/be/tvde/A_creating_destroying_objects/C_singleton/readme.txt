@@ -3,16 +3,18 @@ Enforce the singleton with a private constructor or an enum type
 
 Singleton = class that is instantiated exactly once
 
-2 ways to implement singletons:
+3 ways to implement singletons:
 
 
     * Public static field + private constructor
+    -------------------------------------------
         - the lack of a public or protected constructor guarantees a single instance
         - See Elvis1
 
         The public field INSTANCE makes it clear that the class is a singleton!
 
     * Public static factory method + private constructor
+    ----------------------------------------------------
         - See Elvis2
 
         The static factory method makes it easier to later move away from the singleton idea, you can remove the
@@ -25,6 +27,7 @@ Singleton = class that is instantiated exactly once
         - provide a readResolve method
 
     * Declare a single-element enum
+    -------------------------------
         - See Elvis
 
         This implementation:    - is more concise
