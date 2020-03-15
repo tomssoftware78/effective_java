@@ -1,0 +1,3 @@
+Avoid finalizers and cleaners
+=============================
+
