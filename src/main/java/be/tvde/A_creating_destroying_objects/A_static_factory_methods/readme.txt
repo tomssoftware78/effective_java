@@ -17,10 +17,11 @@ Advantages
 - unlike constructors, static factory methods are not required to create a new object each time they're invoked
      -> preconstructed instances can be used
      -> caching of instances after they are created is possible
-
+     -> can lead to big performance improvement if equivalent objects are requested often, especially if they are
+        expensive to create
 
      By using static factory methods, classes are able to strictly control over what instances exist at any time
-        = instance-controlled
+        = INSTANCE-CONTROLLED
 
 - unlike constructors, static factory methods can return an object of any subtype of their return type.
     -> flexibility in choosing the class of the returned object
@@ -31,14 +32,19 @@ Advantages
         --> by convetion, static factory methods for an interface named 'Type' were put in a non-instantiable
             companion class named 'Types'
 
-            example: See java.util.Collections witch exports nearly all 45 implementations of its interfaces
+            example: See java.util.Collections which exports nearly all 45 implementations of its interfaces
                             the classes of the returned objects are all non-public
 
     As of Java 8, interfaces can contain static methods, so no more reason to provide a non-instantiable companion
         class for an interface
+        In Java 8, all static members of an interface need to be public. To avoid to expose to much in your public
+            API, it often is still necessary to put the bulk of the implementation code of these static methods in
+            seperate package-private classes
+        In Java 9, private static methods are allowed, but static fields and static member classes are still required
+            to be public
 
 - the class of the returned object can vary from call to call depending on the input parameters
-    alternatively, the class of the returned object, can also vary from release to release
+    or can vary from release to release
 
     example: EnumSet has no public constructors, only static factory methods
         The OpenJDK implementation returns an instance of one of 2 subclasses, depending on the size of underlying
@@ -67,7 +73,10 @@ Advantages
 Disadvantages
 -------------
 
-- Classes without public or protected constructors cannot be subclassed
+- Classes without public or protected constructors cannot be subclassed, this becomes a problem when you only provide
+    static factory methods
+        -> this lead to an important design advantage: it encourages programmers to use composition instead of
+            inheritance
 
 - Static factory methods are hard to find for programmers as they do not stand out in API documentation in the
     way that constructors do --> difficult to figure out how to instantiate a class that provides factory methods
@@ -96,3 +105,16 @@ Disadvantages
                     instance
                     example: Object new Array = Array.newInstance(classObject, arrayLen);
 
+        getType()   like getInstance() but used if the factory method is in a different class
+                    example: FileStore fs = Files.getFileStore(path);
+
+        newtype()   like newInstance() but used if the factory method is in a different class
+                    example: BufferedReader br = Files.netBufferedReader(path);
+
+        type        a concise alternative to getType() or newType()
+                    example: List<Complaint> litany = Collections.list(legacyLitany);
+
+Conclusion:
+    Both public constructors and static factory mathods have their uses
+    Static factory methods are ofter preferable, so avoid the reflex to provide public constructors without first
+        considering static factory methods
