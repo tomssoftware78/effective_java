@@ -1,9 +1,10 @@
 Avoid creating unneccessary objects
 ===================================
 
-Often it is appropriate to reuse a single object instead of creating a new functionally equivalent object eacht time
+Often it is appropriate to reuse a single object instead of creating a new functionally equivalent object each time
 it is needed.
-When an object is immutable, it can be reused!
+
+When an object is IMMUTABLE, it can be REUSED!
 
 Extreme example:
     Use
@@ -13,7 +14,7 @@ Extreme example:
     particularly in a loop or frequently invoked method, otherwise many String instances can be created needlessly
 
     --> as a side-effect it is guaranteed that the object (String) will be reused by any other code running in the same
-        virtual machine that happens to contain the same string literal
+        virtual machine that happens to contain the same string literal (String literals are stored in the String pool)
 
 You often avoid creating unnecessary objects by using static factory methods in preference to constructors on
  immutable classes that provide both.
@@ -23,9 +24,14 @@ You often avoid creating unnecessary objects by using static factory methods in 
                             - deprecated in Java 9
                             - constructor must create new object each time it's called
 
+        example:    Compare Person_InEfficient (1) with Person_Efficient (2)
+                    (2) instantiates the expensive Calendar, TimeZone and Date objects only once, instead of every time the
+                        method is called (1)
+                     ==> the more the isBabyBoomer() method is called, the bigger the performance gain will be.
+
 Some object creations are much more expensive than others. If you're going to need such an "expensive object" repeatedly
     it may be advisable to cache it for reuse.
-    Unfortunately, it's not always obious when you're creating such an object:
+    Unfortunately, it's not always obvious when you're creating such an object:
 
         static boolean isRomanNumber(String s) {
             return s.matches("^(?=.)M*(C[MD]|D.C{0,3})([CL]|L?X{0.3})(I[XV]|V?I{0,3})$");
@@ -46,7 +52,7 @@ Some object creations are much more expensive than others. If you're going to ne
                         - improved readability, the Roman Pattern is now explicitly mentioned in the code
 
 
-!!!There is no need to create more than 1 instance of a given adapter to a given object.
+!!!There is no need to create more than 1 instance of an adapter to a given object.
         This is because an adapter is an object that delegates to a backing object, providing an alternative
         interface. An adapter has no state beyond that of its backing object
 
@@ -65,7 +71,10 @@ Some object creations are much more expensive than others. If you're going to ne
 
     (*) causes the program to construct Long instances that are garbage collected immediately
         changing to long sum reduces the runtime from 6.3 seconds to 0.59 seconds
-    ==> prefer primitives to boxed primitives, and watch out for unintentional autoboxing
+    ==> prefer primitives to boxed primitives, and watch out for unintentional autoboxing because autoboxing blurs
+            but does not erase the distinction between primitives and boxed primitive types!
 
 This item is about "Don't create a new object when you should reuse an existing one"
 Couterpoint is item 50 "Don't reuse an existing object when you should create a new one"
+
+Avoid maintaining your own object pools, unless it is a pool of vey expensive to create objects
