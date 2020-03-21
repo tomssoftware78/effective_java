@@ -1,0 +1,8 @@
+Object is a concrete class, but is mainly created for extension.
+All its nonfinal methods (  equals  ) have explicit general CONTRACTS
+                            hashCode
+                            toString
+                            finalize
+
+Classes overriding these methods have the responsibility to obey these contracts.
+Functioning of other classes(ex. HashMap, HashSet, ...) depends on these contracts!
