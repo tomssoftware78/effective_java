@@ -11,6 +11,7 @@ public class ColorPoint extends Point {
         this.color = color;
     }
 
+    //Broken - violates symmetry!
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof ColorPoint)) {
