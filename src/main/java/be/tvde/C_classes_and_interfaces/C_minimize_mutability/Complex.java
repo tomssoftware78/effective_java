@@ -1,4 +1,4 @@
-package be.tvde.C_classes_and_inerfaces.C_minimize_mutability;
+package be.tvde.C_classes_and_interfaces.C_minimize_mutability;
 
 public class Complex {
 
