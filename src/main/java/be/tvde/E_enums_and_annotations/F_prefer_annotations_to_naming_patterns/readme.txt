@@ -1,4 +1,5 @@
 Item 39: Prefer annotations to naming patterns
+==============================================
 
 It used to be common practise to use naming patterns to indicate that some program elements demanded special treatment
 by a tool or framework.
