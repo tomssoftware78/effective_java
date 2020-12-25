@@ -20,6 +20,8 @@ public class ConsumerExample2 {
       System.out.println("------------------");
       Instructors.getAll().forEach(c.andThen(c1));
       System.out.println("------------------");
+      //loop over all the instructors and print out their name it the
+      //years of experience is > 10
       Instructors.getAll().forEach((instructor) -> {
             if(instructor.getYearsOfExperience() > 10) {
                c1.accept(instructor);
@@ -27,5 +29,13 @@ public class ConsumerExample2 {
       });
       System.out.println("------------------");
       Instructors.getAll().forEach(c1.andThen(c)::accept);
+      System.out.println("------------------");
+      //loop over all the instructors and print their name and experience if years
+      //of experience is >5 and teaches course online
+      Instructors.getAll().forEach(instructor -> {
+         if (instructor.getYearsOfExperience() > 5 && instructor.isOnlineCourses()) {
+            c.andThen(c1).accept(instructor);
+         }
+      });
    }
 }
