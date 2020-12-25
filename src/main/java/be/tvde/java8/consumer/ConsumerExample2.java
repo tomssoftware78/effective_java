@@ -25,6 +25,7 @@ public class ConsumerExample2 {
                c1.accept(instructor);
             }
       });
-
+      System.out.println("------------------");
+      Instructors.getAll().forEach(c1.andThen(c)::accept);
    }
 }
