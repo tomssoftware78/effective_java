@@ -47,3 +47,26 @@ Reduce
 ------
    performs a reduction on the elements of the stream
 
+Collections vs Streams
+======================
+
+Collections
+-----------
+   Are used to store and group the data
+   Elements can be added to/removed from collections
+   Have to be iterated externally
+
+   Can be traversed multiple times
+   Are eagerly constructed
+   Examples: List, Set, Map (Arraylist, Vector, HashMap)
+
+Streams
+-------
+   Streams is not a datastructure. It takes input from the collections, arrays, I/O channels and performs
+      operations on it
+   You can not add or remove elements from streams
+   Streams are internally iterated
+
+   Are traversed only once
+   Are lazily constructed
+   Examples: filtering, mapping, reduce, ...
