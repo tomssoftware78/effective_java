@@ -1,4 +1,4 @@
-package be.tvde.java8.streams.operations;
+package be.tvde.java8.streams.operations.map;
 
 import java.util.List;
 import java.util.stream.Collectors;
