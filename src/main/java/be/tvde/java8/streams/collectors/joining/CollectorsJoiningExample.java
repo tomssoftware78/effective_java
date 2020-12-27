@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import be.tvde.java8.model.Instructor;
 import be.tvde.java8.model.Instructors;
 
-public class JoiningExample {
+public class CollectorsJoiningExample {
 
    public static void main(String[] args) {
       final String s = Stream.of("A", "B", "C", "D").collect(Collectors.joining());

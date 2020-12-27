@@ -3,7 +3,7 @@ package be.tvde.java8.streams.collectors.counting;
 import java.util.stream.Collectors;
 import be.tvde.java8.model.Instructors;
 
-public class CountingExample {
+public class CollectorsCountingExample {
 
    public static void main(String[] args) {
       //counting numbers of instructors who teach online courses
